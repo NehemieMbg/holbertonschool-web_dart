@@ -6,10 +6,12 @@ Future<String> fetchUserData() => Future.delayed(
           '{"id" : "7ee9a243-01ca-47c9-aa14-0149789764c3", "username" : "admin"}',
     );
 
-getUserId() async {
-  var strRepr = await fetchUserData();
+Future<String> getUserId() async {
+  String userData = await fetchUserData();
+  Map<String, dynamic> userMap = json.decode(userData);
+  return userMap['id'];
+}
 
-  var Repr = json.decode(strRepr);
-
-  return Repr["id"];
+void main() async {
+  print(await getUserId());
 }
